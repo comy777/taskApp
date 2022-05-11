@@ -8,12 +8,14 @@ import BtnComponent from '../../components/BtnComponent';
 import {AuthStackProps} from '../../interfaces/auth';
 import useAuth from '../../hooks/useAuth';
 import LoadingComponent from '../../components/LoadingComponent';
+import {globalStyles} from '../../styles/globalStyles';
 
 const Login = ({navigation}: AuthStackProps) => {
   const {visiblePassword, setVisiblePassword, loading} = useContextAuth();
   const {email, password, handleChange, loginApi} = useAuth();
   const hanldeNavigate = () => navigation.navigate('register');
   const login = async () => await loginApi({email, password});
+  if (loading) return <LoadingComponent style={globalStyles.loadingFull} />;
   return (
     <View style={authStyles.container}>
       <TextInput

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {getTokenStorage} from '../utils/storage';
 
-const baseURL = 'http://192.168.100.16:4000';
+const baseURL = 'http://192.168.100.10:4000';
 
 export const apiTask = axios.create({baseURL});
 

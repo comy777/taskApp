@@ -20,6 +20,9 @@ const useReducerLessons = () => {
     dispatch({type: 'delete lesson storage', payload: {id}});
   const editLessonStorage = (lesson: Lesson) =>
     dispatch({type: 'edit lesson storage', payload: {lesson}});
+  const setIdLesson = (id: string) =>
+    dispatch({type: 'set id lesson', payload: {id}});
+
   return {
     lessonsState: state,
     saveLessons,
@@ -31,6 +34,7 @@ const useReducerLessons = () => {
     deleteLessonStorage,
     saveSchedule,
     editLessonStorage,
+    setIdLesson,
   };
 };
 

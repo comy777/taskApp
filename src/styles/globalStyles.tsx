@@ -1,4 +1,7 @@
 import {StyleSheet} from 'react-native';
+import {getPaletteSync} from '@assembless/react-native-material-you';
+
+const palette = getPaletteSync();
 
 export const globalStyles = StyleSheet.create({
   constinaer: {
@@ -8,13 +11,18 @@ export const globalStyles = StyleSheet.create({
   loading: {
     justifyContent: 'center',
   },
+  loadingFull: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   fabContainer: {
     position: 'absolute',
     bottom: 20,
     height: 80,
     width: 80,
     borderRadius: 50,
-    backgroundColor: 'white',
+    backgroundColor: palette ? palette.system_accent1[2] : 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -22,7 +30,7 @@ export const globalStyles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 50,
-    backgroundColor: 'teal',
+    backgroundColor: palette ? palette.system_accent1[6] : 'teal',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -33,7 +41,7 @@ export const globalStyles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 50,
-    backgroundColor: 'teal',
+    backgroundColor: palette ? palette.system_accent1[6] : 'teal',
     justifyContent: 'center',
     alignItems: 'center',
     margin: 15,
@@ -41,7 +49,7 @@ export const globalStyles = StyleSheet.create({
   dayContainer: {
     height: 60,
     width: 90,
-    backgroundColor: 'teal',
+    backgroundColor: palette ? palette.system_accent1[6] : 'teal',
     marginHorizontal: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -81,7 +89,11 @@ export const globalStyles = StyleSheet.create({
   textDetails: {
     fontSize: 20,
   },
-  lineSeparator: {borderBottomWidth: 1, marginBottom: 5},
+  lineSeparator: {
+    borderBottomWidth: 1,
+    marginBottom: 5,
+    borderBottomColor: 'teal',
+  },
   schedlueDetails: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -104,7 +116,7 @@ export const globalStyles = StyleSheet.create({
   btnsComponent: {
     height: 70,
     width: 150,
-    backgroundColor: 'teal',
+    backgroundColor: palette ? palette.system_accent1[6] : 'teal',
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -116,14 +128,20 @@ export const globalStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'teal',
     fontSize: 18,
+    color: 'teal',
   },
   inputDesc: {
     fontSize: 18,
   },
   fabGroupVisible: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
     padding: 15,
-    flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
+    zIndex: 999,
   },
   fabGroupNoVisible: {padding: 15, flex: 1},
   fabGroupContainer: {
@@ -136,4 +154,14 @@ export const globalStyles = StyleSheet.create({
     bottom: 90,
     right: 0,
   },
+  taskComponent: {
+    height: 90,
+    width: '100%',
+    //backgroundColor: complete ? 'green' : 'red',
+    borderRadius: 15,
+    padding: 5,
+    marginBottom: 5,
+    justifyContent: 'center',
+  },
+  taskComponentText: {color: 'white', fontSize: 15},
 });

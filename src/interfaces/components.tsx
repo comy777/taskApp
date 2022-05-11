@@ -44,4 +44,6 @@ export interface FabGroupProps {
 export interface IconComponentProps {
   icon: string;
   onPress: () => void;
+  size?: number;
+  style?: StyleProp<ViewStyle>;
 }

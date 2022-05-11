@@ -5,8 +5,19 @@ import useReducerAuth from '../hooks/useReducerAuth';
 export const AuthContext = createContext({} as AuthStateProps);
 
 export const AuthProvider = ({children}: any) => {
-  const {authState, setLoading, setVisiblePassword, setToken, removeToken} =
-    useReducerAuth();
+  const {
+    authState,
+    setLoading,
+    setVisiblePassword,
+    setToken,
+    removeToken,
+    setDarkTheme,
+    setUser,
+    setEditable,
+    setBase64,
+    setImageUser,
+  } = useReducerAuth();
+
   return (
     <AuthContext.Provider
       value={{
@@ -15,6 +26,11 @@ export const AuthProvider = ({children}: any) => {
         setVisiblePassword,
         setToken,
         removeToken,
+        setDarkTheme,
+        setUser,
+        setEditable,
+        setBase64,
+        setImageUser,
       }}>
       {children}
     </AuthContext.Provider>

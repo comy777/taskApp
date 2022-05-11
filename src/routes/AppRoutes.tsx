@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import AuthRoutes from './AuthRoutes';
 import useContextAuth from '../hooks/useContextAuth';
-import LoadingComponent from '../components/LoadingComponent';
-import StackRoutes from './StackRoutes';
+import DrawerRoutes from './DrawerRoutes';
+import {DarkThemeStyle, DefaultThemeStyle} from '../styles/theme';
+import useAuth from '../hooks/useAuth';
 
 const AppRoutes = () => {
-  const {token, loading} = useContextAuth();
-  if (loading) return <LoadingComponent />;
+  const {token, darkTheme} = useContextAuth();
+  const {getToken} = useAuth();
+
+  useEffect(() => {
+    getToken();
+  }, [token]);
+
   return (
-    <NavigationContainer>
-      {token ? <StackRoutes /> : <AuthRoutes />}
+    <NavigationContainer theme={darkTheme ? DarkThemeStyle : DefaultThemeStyle}>
+      {token ? <DrawerRoutes /> : <AuthRoutes />}
     </NavigationContainer>
   );
 };

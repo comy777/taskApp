@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import moment from 'moment';
 import {LessonsContext, MainContext} from '../context/MainContext';
-import {shedule, validateDay} from '../utils/shedule';
+import {shedule} from '../utils/shedule';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import {View} from 'react-native';
 
@@ -12,7 +12,6 @@ const ShedulePicker = () => {
   const handleConfirm = (e: any) => {
     setDateTimeVisible();
     const hora = moment(e).format('LT');
-    //const id = validateDay(day);
     const data = {day, hours: hora};
     setSchedlue(data);
   };

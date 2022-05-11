@@ -4,6 +4,7 @@ import LoadingComponent from '../components/LoadingComponent';
 import useLessons from '../hooks/useLessons';
 import {globalStyles} from '../styles/globalStyles';
 import LessonComponent from '../components/LessonComponent';
+import HeaderComponent from '../components/HeaderComponent';
 
 const Home = () => {
   const {lessons, loading, getLessonsApi} = useLessons();
@@ -13,6 +14,7 @@ const Home = () => {
   if (loading) return <LoadingComponent />;
   return (
     <View style={globalStyles.constinaer}>
+      <HeaderComponent />
       <FlatList
         data={lessons}
         keyExtractor={i => i._id}

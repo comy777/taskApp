@@ -24,6 +24,32 @@ export const authReducer = (
       return {
         ...state,
         token: null,
+        user: null,
+      };
+    case 'set dark theme':
+      return {
+        ...state,
+        darkTheme: !state.darkTheme,
+      };
+    case 'set user':
+      return {
+        ...state,
+        user: action.payload.user,
+      };
+    case 'set editable':
+      return {
+        ...state,
+        editable: !state.editable,
+      };
+    case 'set base64':
+      return {
+        ...state,
+        base64: action.payload.base64,
+      };
+    case 'set image user':
+      return {
+        ...state,
+        imageUser: action.payload.image,
       };
     default:
       return state;

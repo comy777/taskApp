@@ -56,6 +56,11 @@ export const lessonsReducer = (
           i === action.payload.lesson ? i : action.payload.lesson,
         ),
       };
+    case 'set id lesson':
+      return {
+        ...state,
+        idLesson: action.payload.id,
+      };
     default:
       return state;
   }

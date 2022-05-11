@@ -1,4 +1,7 @@
 import {StyleSheet} from 'react-native';
+import {getPaletteSync} from '@assembless/react-native-material-you';
+
+const palette = getPaletteSync();
 
 export const authStyles = StyleSheet.create({
   container: {
@@ -36,7 +39,7 @@ export const authStyles = StyleSheet.create({
     marginVertical: 15,
   },
   btnText: {
-    color: 'white',
+    color: palette ? palette.system_accent1[4] : 'white',
     fontSize: 20,
     fontWeight: 'bold',
   },

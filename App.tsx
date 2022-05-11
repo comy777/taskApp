@@ -1,6 +1,11 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import 'react-native-gesture-handler';
 import {LogBox} from 'react-native';
+import {
+  MaterialYouService,
+  defaultPalette,
+} from '@assembless/react-native-material-you';
 import AppRoutes from './src/routes/AppRoutes';
 import {AuthProvider} from './src/context/AuthContext';
 
@@ -13,7 +18,9 @@ const AuthContextApp = ({children}: any) => {
 const App = () => {
   return (
     <AuthContextApp>
-      <AppRoutes />
+      <MaterialYouService fallbackPalette={defaultPalette}>
+        <AppRoutes />
+      </MaterialYouService>
     </AuthContextApp>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text} from 'react-native';
 import BtnsComponent from '../components/BtnsComponent';
 import {DetailsLessonProps} from '../interfaces/main';
@@ -6,8 +6,13 @@ import {globalStyles} from '../styles/globalStyles';
 import {showAlert} from '../utils/alert';
 import useLessons from '../hooks/useLessons';
 import LoadingComponent from '../components/LoadingComponent';
+import ModalComponent from '../components/ModalComponent';
+import {MainContext} from '../context/MainContext';
+import {useTheme} from '@react-navigation/native';
 
 const DetailsLesson = ({route, navigation}: DetailsLessonProps) => {
+  const {colors} = useTheme();
+  const {setScreen} = useContext(MainContext);
   const {deleteLessonApi, loading} = useLessons();
   const {lesson} = route.params;
   const {lesson: lessonClass, schedlue, _id, nrc, teacher} = lesson;
@@ -17,19 +22,28 @@ const DetailsLesson = ({route, navigation}: DetailsLessonProps) => {
   };
   return (
     <View style={{...globalStyles.constinaer, flex: 1}}>
-      <Text style={globalStyles.textDetails}>Clase: {lessonClass}</Text>
+      <Text style={{...globalStyles.textDetails, color: colors.text}}>
+        Clase: {lessonClass}
+      </Text>
       <View style={globalStyles.lineSeparator} />
-      <Text style={globalStyles.textDetails}>Docente: {teacher}</Text>
+      <Text style={{...globalStyles.textDetails, color: colors.text}}>
+        Docente: {teacher}
+      </Text>
       <View style={globalStyles.lineSeparator} />
-      <Text style={globalStyles.textDetails}>NRC: {nrc}</Text>
+      <Text style={{...globalStyles.textDetails, color: colors.text}}>
+        NRC: {nrc}
+      </Text>
       <View style={globalStyles.lineSeparator} />
       <View>
-        <Text style={globalStyles.textDetails}>Horario: </Text>
+        <Text style={{...globalStyles.textDetails, color: colors.text}}>
+          Horario:{' '}
+        </Text>
         <View style={globalStyles.lineSeparator} />
         {schedlue.map((item, i) => (
           <View key={i} style={globalStyles.schedlueDetails}>
             <View style={globalStyles.point} />
-            <Text style={{...globalStyles.textDetails}}>
+            <Text
+              style={{...{...globalStyles.textDetails, color: colors.text}}}>
               {item.day} {item.hours}
             </Text>
           </View>
@@ -61,15 +75,22 @@ const DetailsLesson = ({route, navigation}: DetailsLessonProps) => {
           btns={[
             {
               title: 'Tareas',
-              onPress: () => navigation.navigate('task stack', {id: _id}),
+              onPress: () => {
+                navigation.navigate('task stack', {id: _id});
+                setScreen('task');
+              },
             },
             {
               title: 'Notas',
-              onPress: () => navigation.navigate('note stack', {id: _id}),
+              onPress: () => {
+                navigation.navigate('note stack', {id: _id});
+                setScreen('note');
+              },
             },
           ]}
         />
       </View>
+      <ModalComponent />
     </View>
   );
 };

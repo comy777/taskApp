@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useMaterialYouPalette} from '@assembless/react-native-material-you';
 import FabBtnComponent from '../components/FabBtnComponent';
 import Home from '../screens/Home';
 import {LessonsContext} from '../context/MainContext';
@@ -8,6 +9,7 @@ import {LessonsContext} from '../context/MainContext';
 const Tab = createBottomTabNavigator();
 
 const TabRoutes = () => {
+  const palette = useMaterialYouPalette();
   const navigation = useNavigation();
   const {saveSchedule} = useContext(LessonsContext);
   return (
@@ -15,7 +17,7 @@ const TabRoutes = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: 'teal',
+          backgroundColor: palette ? palette.system_accent1[2] : 'teal',
         },
         tabBarShowLabel: false,
         tabBarActiveTintColor: 'white',

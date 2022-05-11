@@ -8,13 +8,13 @@ import IconComponent from './IconComponent';
 import {FabGroupProps} from '../interfaces/components';
 
 const FabGroup = ({icons}: FabGroupProps) => {
-  const {fabVisible, setFabVisible} = useContext(MainContext);
+  const {fabVisible, setFabVisible, loading} = useContext(MainContext);
   return (
     <View style={globalStyles.fabGroupContainer}>
       {fabVisible && (
         <View style={globalStyles.fabGroup3}>
           {icons.map((item, i) => (
-            <IconComponent key={i} {...item} />
+            <IconComponent key={i} {...item} size={24} />
           ))}
         </View>
       )}
@@ -23,7 +23,7 @@ const FabGroup = ({icons}: FabGroupProps) => {
           name={fabVisible ? 'close-outline' : 'add'}
           color="white"
           size={42}
-          onPress={setFabVisible}
+          onPress={loading ? () => {} : setFabVisible}
         />
       </View>
     </View>

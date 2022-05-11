@@ -1,5 +1,7 @@
 import {UserAuth} from '../interfaces/auth';
 import {showToast} from './showToast';
+import {ScheduleTask} from '../interfaces/task';
+import moment, {MomentInput} from 'moment';
 
 export const validateFormRegister = (user: UserAuth) => {
   const {password, repeatPassword, email} = user;
@@ -33,4 +35,23 @@ export const validateFormLogin = (user: UserAuth) => {
     return false;
   }
   return true;
+};
+
+export const validateSchedule = (
+  item: ScheduleTask | null,
+  setFabVisible: () => void,
+) => {
+  if (!item) {
+    showToast('Es necesario un horario');
+    setFabVisible();
+    return false;
+  }
+  return true;
+};
+
+export const transformDate = (schedule: MomentInput) => {
+  const day = moment(schedule).format('YYYY/MM/DD');
+  const hour = moment(schedule).format('h:mm:ss a');
+  const data = {day, hour};
+  return data;
 };

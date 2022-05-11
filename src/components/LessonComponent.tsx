@@ -1,13 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Lesson} from '../interfaces/response';
 import {globalStyles} from '../styles/globalStyles';
 import {useNavigation} from '@react-navigation/native';
+import {LessonsContext} from '../context/MainContext';
 
 const LessonComponent = (props: Lesson) => {
   const navigation = useNavigation();
-  const handleNavigate = () =>
+  const {setIdLesson} = useContext(LessonsContext);
+  const handleNavigate = () => {
     navigation.navigate('details lesson', {lesson: props});
+    const {_id} = props;
+    setIdLesson(_id);
+  };
   const {lesson, schedlue} = props;
   return (
     <View style={globalStyles.lessonContainer}>

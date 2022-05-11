@@ -10,7 +10,18 @@ const useContextAuth = () => {
     visiblePassword,
     setToken,
     removeToken,
+    setDarkTheme,
+    darkTheme,
+    setUser,
+    user,
+    setEditable,
+    editable,
+    base64,
+    setBase64,
+    imageUser,
+    setImageUser,
   } = useContext(AuthContext);
+
   return {
     loading,
     setLoading,
@@ -19,6 +30,16 @@ const useContextAuth = () => {
     visiblePassword,
     setToken,
     removeToken,
+    setDarkTheme,
+    darkTheme,
+    setUser,
+    user,
+    setEditable,
+    editable,
+    base64,
+    setBase64,
+    imageUser,
+    setImageUser,
   };
 };
 

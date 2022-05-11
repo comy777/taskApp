@@ -1,11 +1,16 @@
 import {apiTask} from './config';
-import {LessonResponse, SaveLesson, Lesson} from '../interfaces/lesson';
+import {LessonResponse, SaveLesson} from '../interfaces/lesson';
 import {
   DeleteLessonResponse,
   SaveLessonResponse,
   EditLessonResponse,
+  UriImage,
 } from '../interfaces/response';
 import {showToast} from '../utils/showToast';
+import {ImagePicker} from '../interfaces/main';
+import axios from 'axios';
+import {TaskStorage} from '../interfaces/task';
+import {NoteSave} from '../interfaces/notes';
 
 export const getLessons = async () => {
   const resp = await apiTask.get<LessonResponse>('/lessons');
@@ -45,4 +50,65 @@ export const editLesson = async (id: string, lesson: SaveLesson) => {
   const {lesson: clase} = resp.data;
   showToast('Clase editada');
   return clase;
+};
+
+export const saveImages = async (
+  images: ImagePicker[],
+  setImages: (images: UriImage[], task: TaskStorage) => void,
+  task: TaskStorage,
+) => {
+  const urlCloudinary =
+    'https://api.cloudinary.com/v1_1/djtqfpw2e/image/upload';
+  try {
+    let data: UriImage[] = [];
+    let contador = 0;
+    images.map((item, i) => {
+      (async () => {
+        const {base64} = item;
+        let base64Img = `data:image/jpg;base64,${base64}`;
+        const dataImage = {file: base64Img, upload_preset: 'instaclone'};
+        const resp = await axios.post(`${urlCloudinary}`, dataImage);
+        data[contador] = {uri: resp.data.secure_url};
+        contador++;
+        if (contador === images.length) {
+          setImages(data, task);
+        }
+      })();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveImagesNote = async (
+  images: ImagePicker[],
+  setImages: (
+    images: UriImage[],
+    note: NoteSave,
+    imagesNoSubir?: UriImage[],
+  ) => void,
+  note: NoteSave,
+  imagesNoSubir?: UriImage[],
+) => {
+  const urlCloudinary =
+    'https://api.cloudinary.com/v1_1/djtqfpw2e/image/upload';
+  try {
+    let data: UriImage[] = [];
+    let contador = 0;
+    images.map((item, i) => {
+      (async () => {
+        const {base64} = item;
+        let base64Img = `data:image/jpg;base64,${base64}`;
+        const dataImage = {file: base64Img, upload_preset: 'instaclone'};
+        const resp = await axios.post(`${urlCloudinary}`, dataImage);
+        data[contador] = {uri: resp.data.secure_url};
+        contador++;
+        if (contador === images.length) {
+          setImages(data, note, imagesNoSubir);
+        }
+      })();
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
